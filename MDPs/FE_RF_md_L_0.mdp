@@ -1,0 +1,68 @@
+title                    = MD simulation of Villin Headpiece
+;Preprocessor
+cpp			 = /lib/cpp
+;Directories to include in the topology format
+include 		 = -I../top
+;Run control: A leap-frog algorithm for integrating Newton's equations. 
+integrator		 = md
+;Total simulation time: 100 ps
+:time step in femtoseconds 
+dt			 = 0.002
+;number of steps
+nsteps  		 = 100000
+;frequency to write coordinates to output trajectory file
+nstxout 		 = 100000
+;frequency to write velocities to output trajectory file
+nstvout 		 = 100000
+;frequency to write energies to log file
+nstlog  		 = 5000
+;frequency to write energies to energy file
+nstenergy		 = 5000
+;frequency to write coordinates to xtc trajectory 
+nstxtcout		 = 5000
+;group(s) to write to xtc trajectory
+xtc_grps		 = Non-water
+;group(s) to write to energy file 
+;energygrps		 = protein
+;Frequency to update the neighbor list (and the long-range forces, 
+;when using twin-range cut-off's). 
+nstlist 		 = 5
+;Make a grid in the box and only check atoms in neighboring grid cells 
+;when constructing a new neighbor list every nstlist steps. 
+ns_type 		 = grid
+;treatment of electrostatic interactions
+coulombtype		 = reaction-field
+epsilon_rf		 = 62.0
+rcoulomb		 = 1.4
+;treatment of van der waals interactions
+rvdw			 = 1.4
+; Periodic boudary conditions in all the directions 
+pbc                      = xyz
+;Temperature coupling
+tcoupl  		 = berendsen
+tc-grps 		 = non-Water Water
+tau_t			 = 0.1 0.1   
+ref_t			 = 300 300 
+;Pressure coupling
+Pcoupl  		 = berendsen
+Pcoupltype               = isotropic
+tau_p			 = 1.0
+compressibility 	 = 4.5e-5 4.5e-5
+ref_p			 = 1.0 1.0
+;Velocity generation
+;gen_vel 		 = yes
+gen_temp		 = 300
+gen_seed		 = -1
+;Constrain all bonds
+constraints		 = all-bonds
+; FE part
+free-energy              = yes
+sc-alpha                 = 0.5 
+sc-r-power               = 6 
+sc-power                 = 1  
+fep-lambdas              = 0.0 0.05 0.1 0.15 0.2 0.25 0.3 0.35 0.4 0.45 0.5 0.55 0.6 0.65 0.7 0.75 0.8 0.85 0.9 0.95 1.0
+init-lambda-state        = 0
+calc-lambda-neighbors    = -1
+nstdhdl                  = 100
+dhdl-print-energy        = yes
+
